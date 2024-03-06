@@ -18,12 +18,12 @@ const SearchContainer = () => {
           <FormRowSelect
             name="month"
             labelText="bulan"
-            list={[...Object.values(MONTH)]}
+            list={[{ value: "", labelOpt: "Semua" }, ...Object.values(MONTH)]}
           />
           <FormRowSelect
             name="year"
             labelText="tahun"
-            list={[...Object.values(YEAR)]}
+            list={[{ value: "", labelOpt: "Semua" }, ...Object.values(YEAR)]}
           />
           <button
             type="submit"

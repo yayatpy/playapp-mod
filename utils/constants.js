@@ -23,7 +23,6 @@ export const TUKIN_SORT_BY = [
 ];
 
 export const MONTH = [
-  { value: "", labelOpt: "Semua" },
   { value: 1, labelOpt: "Januari" },
   { value: 2, labelOpt: "Februari" },
   { value: 3, labelOpt: "Maret" },
@@ -38,8 +37,14 @@ export const MONTH = [
   { value: 12, labelOpt: "Desember" },
 ];
 
+export const NAMA_BULAN = [
+  { value: "January", labelOpt: "Januari" },
+  { value: "February", labelOpt: "Februari" },
+  { value: "March", labelOpt: "Maret" },
+  { value: "  ", labelOpt: "April" },
+];
+
 export const YEAR = [
-  { value: "", labelOpt: "Semua" },
   { value: 2023, labelOpt: "2023" },
   { value: 2024, labelOpt: "2024" },
 ];

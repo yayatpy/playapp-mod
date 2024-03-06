@@ -20,6 +20,7 @@ import { loader as tukinLoader } from "./pages/AllRincian";
 import { action as profileAction } from "./pages/Profile";
 import { action as passwordAction } from "./pages/Password";
 import { loader as adminLoader } from "./pages/Admin";
+import { action as uploadAction } from "./pages/UploadFile";
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem("darkTheme") === "true";
@@ -77,6 +78,7 @@ const router = createBrowserRouter([
           {
             path: "upload-xl",
             element: <UploadXlPage />,
+            action: uploadAction,
           },
         ],
       },
