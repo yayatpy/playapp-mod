@@ -7,12 +7,8 @@ import { NAMA_BULAN, YEAR } from "../../../utils/constants";
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
-  const { data } = Object.fromEntries(formData);
-  const file = formData.get("file");
-  console.log({ data });
-  console.log({ file });
   try {
-    await customFetch.post("/data/upload-xl", data, {
+    await customFetch.post("/data/upload-xl", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -31,7 +27,7 @@ const UploadXlPage = () => {
 
   return (
     <Wrapper>
-      <Form className="form" method="post">
+      <Form className="form" method="post" encType="multipart/form-data">
         <h4 className="form-title">upload data tukin</h4>
         <div className="form-center">
           <div className="form-row">
@@ -40,7 +36,6 @@ const UploadXlPage = () => {
             </label>
             <input
               type="file"
-              id="file"
               name="file"
               className="form-input"
               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
