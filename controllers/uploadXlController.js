@@ -31,7 +31,12 @@ export const uploadXlFile = async (req, res) => {
         await Xlfile.create({
           name: item.name,
           quantity: item.quantity,
-          month: new Date(`${req.body.year}-${req.body.month}-02`),
+          // month: new Date(`${req.body.year}-${req.body.month}-01`),
+          month: new Date(
+            `${req.body.year}-${
+              req.body.month < 10 ? "0" + req.body.month : req.body.month
+            }-01`
+          ),
         });
       }
 

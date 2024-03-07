@@ -37,12 +37,6 @@ export const MONTH = [
   { value: 12, labelOpt: "Desember" },
 ];
 
-export const NAMA_BULAN = [
-  { value: "January", labelOpt: "Januari" },
-  { value: "February", labelOpt: "Februari" },
-  { value: "March", labelOpt: "Maret" },
-];
-
 export const YEAR = [
   { value: 2024, labelOpt: "2024" },
   { value: 2023, labelOpt: "2023" },

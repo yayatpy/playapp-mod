@@ -3,7 +3,7 @@ import { FormRowSelect } from "../components";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
 import { useNavigation, Form } from "react-router-dom";
 import { toast } from "react-toastify";
-import { NAMA_BULAN, YEAR } from "../../../utils/constants";
+import { MONTH, YEAR } from "../../../utils/constants";
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
@@ -48,7 +48,7 @@ const UploadXlPage = () => {
             labelText="bulan"
             list={[
               { value: "", labelOpt: "Pilih Bulan" },
-              ...Object.values(NAMA_BULAN),
+              ...Object.values(MONTH),
             ]}
           />
           <FormRowSelect
