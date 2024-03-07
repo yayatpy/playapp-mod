@@ -81,11 +81,6 @@ const router = createBrowserRouter([
               },
             ],
           },
-          // {
-          //   path: "upload",
-          //   element: <UploadFile />,
-          //   action: actionUpload,
-          // },
         ],
       },
     ],

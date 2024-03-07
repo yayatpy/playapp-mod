@@ -1,7 +1,7 @@
 // uploadDataController.js
 import XLSX from "xlsx";
 import fs from "fs";
-import Xlfile from "../models/uploadModel.js";
+import Xlfile from "../models/tukinModel.js";
 import upload from "../middleware/uploadMid.js";
 export const uploadFile = async (req, res) => {
   try {
@@ -29,11 +29,21 @@ export const uploadFile = async (req, res) => {
         const item = data[i];
 
         await Xlfile.create({
-          name: item.name,
-          naskun: item.naskun,
-          nasbung: item.nasbung,
-          quantity: item.quantity,
-          month: new Date(
+          tukin: item.tukin,
+          koperasi: item.koperasi,
+          pengayoman: item.pengayoman,
+          dharmaWanita: item.dharmaWanita,
+          bapor: item.bapor,
+          majelisTaklim: item.majelisTaklim,
+          sosial: item.sosial,
+          qurban: item.qurban,
+          bendahara: item.bendahara,
+          pinjKoperasi: item.pinjKoperasi,
+          lainLain: item.lainLain,
+          jumPot: item.jumPot,
+          jumBersih: item.jumBersih,
+          nip: item.nip,
+          bulan: new Date(
             `${req.body.year}-${
               req.body.month < 10 ? "0" + req.body.month : req.body.month
             }-01`
