@@ -78,15 +78,3 @@ export const validateChangePass = withValidationErrors([
     }
   }),
 ]);
-
-export const validateUploadInput = withValidationErrors([
-  check("month").notEmpty().withMessage("Bulan harus dipilih"),
-  check("year").notEmpty().withMessage("Tahun harus dipilih"),
-  (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    next();
-  },
-]);

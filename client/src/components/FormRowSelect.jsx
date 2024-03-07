@@ -9,6 +9,7 @@ const FormRowSelect = ({ name, labelText, list, defaultValue = "" }) => {
         id={name}
         className="form-select"
         defaultValue={defaultValue}
+        required
       >
         {list.map((itemValue) => {
           const { value, labelOpt } = itemValue;
