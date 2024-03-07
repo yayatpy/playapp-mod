@@ -1,18 +1,21 @@
-// uploadXlController.js
+// uploadDataController.js
 import XLSX from "xlsx";
 import fs from "fs";
-import Test from "../models/uploadModel.js";
+import Xlfile from "../models/uploadModel.js";
 import upload from "../middleware/uploadMid.js";
-export const uploadXlFile = async (req, res) => {
+export const uploadFile = async (req, res) => {
   try {
     upload.single("file")(req, res, async (err) => {
       if (err) {
-        return res.status(500).send(err);
+        console.log(err);
+        return res
+          .status(500)
+          .json({ msg: "Data yang diupload bukan file *.xlx,*.xlxs" });
       }
 
       const file = req.file;
       if (!file) {
-        return res.status(400).send("No file uploaded.");
+        return res.status(400).json({ msg: "Tidak ada file yang diupload" });
       }
 
       const workbook = XLSX.readFile(file.path);
@@ -25,10 +28,16 @@ export const uploadXlFile = async (req, res) => {
       for (let i = 0; i < data.length; i++) {
         const item = data[i];
 
-        await Test.create({
+        await Xlfile.create({
           name: item.name,
+          naskun: item.naskun,
+          nasbung: item.nasbung,
           quantity: item.quantity,
-          month: new Date(`${req.body.year}-${req.body.month}-02`),
+          month: new Date(
+            `${req.body.year}-${
+              req.body.month < 10 ? "0" + req.body.month : req.body.month
+            }-01`
+          ),
         });
       }
 

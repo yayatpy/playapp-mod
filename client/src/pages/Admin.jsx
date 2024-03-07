@@ -1,6 +1,8 @@
 import { toast } from "react-toastify";
-import { redirect } from "react-router-dom";
+import { Link, Outlet, redirect } from "react-router-dom";
 import customFetch from "../utils/customFetch";
+import Wrapper from "../assets/wrappers/DashboardFormPage";
+import { UploadFile } from "../components";
 
 export const loader = async () => {
   try {
@@ -13,7 +15,7 @@ export const loader = async () => {
 };
 
 const Admin = () => {
-  return <h4>admin page</h4>;
+  return <Outlet />;
 };
 
 export default Admin;

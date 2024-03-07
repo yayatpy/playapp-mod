@@ -7,3 +7,5 @@ export { default as Navbar } from "./Navbar";
 export { default as TukinContainer } from "./TukinContainer";
 export { default as SearchContainer } from "./SearchContainer";
 export { default as SubmitBtn } from "./SubmitBtn";
+export { default as UploadFile } from "./UploadFile";
+export { default as MenuAdmin } from "./MenuAdmin";

@@ -10,9 +10,8 @@ import {
   Profile,
   Admin,
   Password,
-  UploadPage,
-  UploadXlPage,
 } from "./pages";
+import { MenuAdmin, UploadFile } from "./components";
 
 import { action as loginAction } from "./pages/Login";
 import { loader as dashboardLoader } from "./pages/DashboardLayout";
@@ -20,7 +19,7 @@ import { loader as tukinLoader } from "./pages/AllRincian";
 import { action as profileAction } from "./pages/Profile";
 import { action as passwordAction } from "./pages/Password";
 import { loader as adminLoader } from "./pages/Admin";
-import { action as uploadAction } from "./pages/UploadFile";
+import { action as actionUpload } from "./components/UploadFile";
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem("darkTheme") === "true";
@@ -70,16 +69,23 @@ const router = createBrowserRouter([
             path: "admin",
             element: <Admin />,
             loader: adminLoader,
+            children: [
+              {
+                index: "true",
+                element: <MenuAdmin />,
+              },
+              {
+                path: "upload",
+                element: <UploadFile />,
+                action: actionUpload,
+              },
+            ],
           },
-          {
-            path: "upload",
-            element: <UploadPage />,
-          },
-          {
-            path: "upload-xl",
-            element: <UploadXlPage />,
-            action: uploadAction,
-          },
+          // {
+          //   path: "upload",
+          //   element: <UploadFile />,
+          //   action: actionUpload,
+          // },
         ],
       },
     ],

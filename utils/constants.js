@@ -38,6 +38,6 @@ export const MONTH = [
 ];
 
 export const YEAR = [
-  { value: 2024, labelOpt: "2024" },
   { value: 2023, labelOpt: "2023" },
+  { value: 2024, labelOpt: "2024" },
 ];

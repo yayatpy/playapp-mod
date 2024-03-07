@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { uploadFile } from "../controllers/uploadControllers.js";
-import upload from "../middleware/uploadMid.js";
-
 const router = Router();
+import { uploadFile } from "../controllers/uploadController.js";
 
-router.post("/upload", upload.single("file"), uploadFile);
+// Route untuk upload file Excel
+router.post("/upload-file", uploadFile);
 
 export default router;

@@ -45,6 +45,5 @@ export const changePass = async (req, res) => {
 };
 
 export const adminMenu = async (req, res) => {
-  console.log("admin");
   res.status(StatusCodes.OK).json({ msg: "admin" });
 };

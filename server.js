@@ -13,8 +13,7 @@ import tukinRouter from "./routes/tukinRouter.js";
 import userRouter from "./routes/userRouter.js";
 import authRouter from "./routes/authRouter.js";
 import deleteTukin from "./routes/deleteTukin.js";
-import uploadRoutes from "./routes/uploadRouter.js";
-import uploadXl from "./routes/uploadXl.js";
+import uploadRouter from "./routes/uploadRouter.js";
 
 //PUBLIC
 import { dirname } from "path";
@@ -54,8 +53,7 @@ app.use("/api/v1/tukins", authenticationUser, tukinRouter);
 app.use("/api/v1/users", authenticationUser, userRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/del", deleteTukin);
-app.use("/api/v1/data", uploadRoutes);
-app.use("/api/v1/data", uploadXl);
+app.use("/api/v1/data", uploadRouter);
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));

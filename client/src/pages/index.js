@@ -8,5 +8,4 @@ export { default as Login } from "./Login";
 export { default as Profile } from "./Profile";
 export { default as Stats } from "./Stats";
 export { default as Password } from "./Password";
-export { default as UploadPage } from "./UploadPage";
-export { default as UploadXlPage } from "./UploadFile";
+export { default as UploadFile } from "../components/UploadFile";

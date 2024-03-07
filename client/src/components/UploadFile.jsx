@@ -1,37 +1,33 @@
 import customFetch from "../utils/customFetch";
-import { FormRowSelect } from "../components";
+import { FormRowSelect } from ".";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
-import { useNavigation, Form } from "react-router-dom";
+import { useNavigation, Form, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
-import { NAMA_BULAN, YEAR } from "../../../utils/constants";
+import { MONTH, YEAR } from "../../../utils/constants";
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
-  const { data } = Object.fromEntries(formData);
-  const file = formData.get("file");
-  console.log({ data });
-  console.log({ file });
   try {
-    await customFetch.post("/data/upload-xl", data, {
+    await customFetch.post("/data/upload-file", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
     toast.success("Upload data berhasil");
-    return null;
+    // return null;
   } catch (error) {
     toast.error(error?.response?.data?.msg);
-    return null;
   }
+  return null;
 };
 
-const UploadXlPage = () => {
+const UploadFile = () => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
   return (
     <Wrapper>
-      <Form className="form" method="post">
+      <Form className="form" method="post" encType="multipart/form-data">
         <h4 className="form-title">upload data tukin</h4>
         <div className="form-center">
           <div className="form-row">
@@ -40,7 +36,6 @@ const UploadXlPage = () => {
             </label>
             <input
               type="file"
-              id="file"
               name="file"
               className="form-input"
               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
@@ -49,14 +44,17 @@ const UploadXlPage = () => {
           <FormRowSelect
             name="month"
             labelText="bulan"
+            required={true}
             list={[
               { value: "", labelOpt: "Pilih Bulan" },
-              ...Object.values(NAMA_BULAN),
+              ...Object.values(MONTH),
             ]}
           />
           <FormRowSelect
             name="year"
-            labelText="year"
+            labelText="Tahun"
+            required={true}
+            defaultValue={YEAR.find((year) => year.value === 2024)?.value}
             list={[
               { value: "", labelOpt: "Pilih Tahun" },
               ...Object.values(YEAR),
@@ -76,4 +74,4 @@ const UploadXlPage = () => {
   );
 };
 
-export default UploadXlPage;
+export default UploadFile;
