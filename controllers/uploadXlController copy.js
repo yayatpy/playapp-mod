@@ -1,30 +1,30 @@
+// uploadXlController.js
 import XLSX from "xlsx";
 import fs from "fs";
 import Test from "../models/uploadModel.js";
 import upload from "../middleware/uploadMid.js";
-// Fungsi untuk mengupload file Excel
 export const uploadXlFile = async (req, res) => {
   try {
-    // Simpan file Excel ke server menggunakan multer
     upload.single("file")(req, res, async (err) => {
       if (err) {
         return res.status(500).send(err);
       }
 
-      // Baca file Excel
       const file = req.file;
+      if (!file) {
+        return res.status(400).send("No file uploaded.");
+      }
+
       const workbook = XLSX.readFile(file.path);
       const sheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[sheetName];
       const data = XLSX.utils.sheet_to_json(worksheet);
 
-      // Hapus file Excel dari server
       fs.unlinkSync(file.path);
 
-      // Proses data Excel
       for (let i = 0; i < data.length; i++) {
         const item = data[i];
-        // Simpan ke MongoDB
+
         await Test.create({
           name: item.name,
           quantity: item.quantity,

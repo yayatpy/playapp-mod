@@ -41,7 +41,6 @@ export const NAMA_BULAN = [
   { value: "January", labelOpt: "Januari" },
   { value: "February", labelOpt: "Februari" },
   { value: "March", labelOpt: "Maret" },
-  { value: "  ", labelOpt: "April" },
 ];
 
 export const YEAR = [

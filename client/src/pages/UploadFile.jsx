@@ -7,6 +7,8 @@ import { NAMA_BULAN, YEAR } from "../../../utils/constants";
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  console.log(data);
   try {
     await customFetch.post("/data/upload-xl", formData, {
       headers: {
@@ -17,7 +19,7 @@ export const action = async ({ request }) => {
     return null;
   } catch (error) {
     toast.error(error?.response?.data?.msg);
-    return null;
+    return error;
   }
 };
 
@@ -51,7 +53,7 @@ const UploadXlPage = () => {
           />
           <FormRowSelect
             name="year"
-            labelText="year"
+            labelText="Tahun"
             list={[
               { value: "", labelOpt: "Pilih Tahun" },
               ...Object.values(YEAR),
