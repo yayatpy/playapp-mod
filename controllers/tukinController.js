@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import { NotFoundError } from "../errors/customErrors.js";
-import Tukin from "../models/tukinModel.js";
+import Tukin from "../models/tukinTestModel.js";
 
 //GET ALL TUKINS
 export const getAllTukins = async (req, res) => {
@@ -55,4 +55,27 @@ export const getTukin = async (req, res) => {
   if (tukin.length === 0)
     throw new NotFoundError(` tukin dengan nip ${nip} tidak ditemukan`);
   res.status(StatusCodes.OK).json({ tukin });
+};
+
+//DELETE DATA TUKIN
+export const deleteTukin = async (req, res) => {
+  const { bulan, tahun } = req.params;
+  const startDate = new Date(tahun, bulan - 1, 1); // Month dalam JavaScript dimulai dari 0 (Januari=0, Februari=1, dst.)
+  const endDate = new Date(tahun, bulan, 0); // Menggunakan 0 untuk mendapatkan tanggal terakhir bulan sebelumnya
+  const filter = {
+    bulan: {
+      $gte: startDate,
+      $lt: endDate,
+    },
+  };
+  const result = await Tukin.find(filter);
+  if (result.length === 0) {
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ msg: `Data Tukin bulan: ${bulan}/${tahun} tidak ditemukan.` });
+  }
+  await Tukin.deleteMany(filter);
+  return res
+    .status(StatusCodes.OK)
+    .json({ msg: `Hapus data Tukin bulan: ${bulan}/${tahun} berhasil.` });
 };

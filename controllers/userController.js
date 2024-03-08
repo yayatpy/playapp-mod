@@ -36,8 +36,8 @@ export const updatePeg = async (req, res) => {
 };
 
 export const changePass = async (req, res) => {
-  const { newPassword } = req.body;
-  const hashedPassword = await hashPassword(newPassword);
+  const { password } = req.body;
+  const hashedPassword = await hashPassword(password);
   const changePass = await Pegawai.findByIdAndUpdate(req.user.pegId, {
     password: hashedPassword,
   });

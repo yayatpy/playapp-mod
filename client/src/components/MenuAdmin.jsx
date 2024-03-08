@@ -9,11 +9,11 @@ const MenuAdmin = () => {
         <Link className="btn form-btn" to="/dashboard/admin/upload">
           upload data tukin
         </Link>
-        <Link className="btn form-btn" to="../admin/reset-pass">
-          reset password
+        <Link className="btn form-btn" to="../admin/hapus-data">
+          hapus data tukin
         </Link>
-        <Link className="btn form-btn" to="../admin/menu-lain">
-          menu lain
+        <Link className="btn form-btn" to="../admin/tambah-peg">
+          tambah pegawai
         </Link>
       </div>
     </Wrapper>

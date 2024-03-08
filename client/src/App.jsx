@@ -1,4 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import {
   HomeLayout,
   Landing,
@@ -10,8 +13,9 @@ import {
   Profile,
   Admin,
   Password,
+  HapusData,
 } from "./pages";
-import { MenuAdmin, UploadFile } from "./components";
+import { MenuAdmin, TambahPeg, UploadFile } from "./components";
 
 import { action as loginAction } from "./pages/Login";
 import { loader as dashboardLoader } from "./pages/DashboardLayout";
@@ -20,6 +24,8 @@ import { action as profileAction } from "./pages/Profile";
 import { action as passwordAction } from "./pages/Password";
 import { loader as adminLoader } from "./pages/Admin";
 import { action as actionUpload } from "./components/UploadFile";
+import { action as actionHapus } from "./components/HapusData";
+import { action as actionTambahPeg } from "./components/TambahPeg";
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem("darkTheme") === "true";
@@ -28,6 +34,14 @@ export const checkDefaultTheme = () => {
 };
 
 checkDefaultTheme();
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5,
+    },
+  },
+});
 
 const router = createBrowserRouter([
   {
@@ -79,6 +93,16 @@ const router = createBrowserRouter([
                 element: <UploadFile />,
                 action: actionUpload,
               },
+              {
+                path: "hapus-data",
+                element: <HapusData />,
+                action: actionHapus,
+              },
+              {
+                path: "tambah-peg",
+                element: <TambahPeg />,
+                action: actionTambahPeg,
+              },
             ],
           },
         ],
@@ -88,7 +112,12 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />;
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
 };
 
 export default App;

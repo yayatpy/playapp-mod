@@ -1,7 +1,7 @@
 // uploadDataController.js
 import XLSX from "xlsx";
 import fs from "fs";
-import Xlfile from "../models/tukinModel.js";
+import Xlfile from "../models/tukinTestModel.js";
 import upload from "../middleware/uploadMid.js";
 export const uploadFile = async (req, res) => {
   try {

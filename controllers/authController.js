@@ -1,4 +1,4 @@
-import { comparePassword } from "../utils/passwordUtils.js";
+import { comparePassword, hashPassword } from "../utils/passwordUtils.js";
 import Pegawai from "../models/pegModel.js";
 import {
   UnauthenticatedError,
@@ -7,6 +7,15 @@ import {
 import { createJWT } from "../utils/tokenUtils.js";
 import { StatusCodes } from "http-status-codes";
 
+//TAMBAH PEGAWAI
+export const tambahPeg = async (req, res) => {
+  await Pegawai.create(req.body);
+  res
+    .status(StatusCodes.CREATED)
+    .json({ msg: `akun untuk ${req.body.nama} berhasil dibuat` });
+};
+
+//LOGIN
 export const login = async (req, res) => {
   const pegawai = await Pegawai.findOne({ nip: req.body.nip });
   const isValid =
@@ -28,6 +37,7 @@ export const login = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "user log in" });
 };
 
+//LOGOUT
 export const logout = (req, res) => {
   res.cookie("token", "logout", {
     httpOnly: true,

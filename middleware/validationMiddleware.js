@@ -19,6 +19,22 @@ const withValidationErrors = (validateValues) => {
   ];
 };
 
+export const validateTambahPeg = withValidationErrors([
+  body("nip")
+    .custom(async (nip, { req }) => {
+      const peg = await Peg.findOne({ nip });
+      if (peg) {
+        throw new BadRequestError("NIP sudah terdaftar");
+      }
+    })
+    .notEmpty()
+    .withMessage("alamat belum diisi")
+    .isLength({ min: 18, max: 18 })
+    .withMessage("NIP harus 18 digit")
+    .isNumeric()
+    .withMessage("NIP harus berupa angka tanpa spasi"),
+]);
+
 export const validateLoginInput = withValidationErrors([
   body("nip").notEmpty().withMessage("nip belum diisi"),
   body("password").notEmpty().withMessage("password belum diisi"),
@@ -36,18 +52,18 @@ export const validateUpdatePegInput = withValidationErrors([
     })
     .notEmpty()
     .withMessage("alamat belum diisi")
-    .isLength(18)
+    .isLength({ min: 18, max: 18 })
     .withMessage("NIP harus 18 digit")
     .isNumeric()
     .withMessage("NIP harus berupa angka tanpa spasi"),
 ]);
 
 export const validateChangePass = withValidationErrors([
-  body("newPassword")
+  body("password")
     .isLength({ min: 6 })
     .withMessage("Password minimal 6 karakter"),
-  body("confirmPass").custom(async (value, { req }) => {
-    if (value !== req.body.newPassword) {
+  body("confPassword").custom(async (value, { req }) => {
+    if (value !== req.body.password) {
       throw new BadRequestError(
         "Pastikan password baru dan konfirmasinya sama"
       );

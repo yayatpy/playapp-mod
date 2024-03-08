@@ -7,13 +7,12 @@ import { MONTH, YEAR } from "../../../utils/constants";
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  const { bulan, tahun } = data;
+  console.log(bulan);
   try {
-    await customFetch.post("/data/upload-file", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    toast.success("Upload data berhasil");
+    const response = await customFetch.delete(`/tukins/${bulan}/${tahun}`);
+    toast.success(response.data.msg);
     return redirect("/dashboard/admin");
   } catch (error) {
     toast.error(error?.response?.data?.msg);
@@ -21,28 +20,16 @@ export const action = async ({ request }) => {
   }
 };
 
-const UploadFile = () => {
+const HapusData = () => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
-
   return (
     <Wrapper>
-      <Form className="form" method="post" encType="multipart/form-data">
-        <h4 className="form-title">upload data tukin</h4>
+      <Form method="post" className="form">
+        <h4 className="form-title">hapus data tukin</h4>
         <div className="form-center">
-          <div className="form-row">
-            <label htmlFor="file" className="form-label">
-              pilih file excell
-            </label>
-            <input
-              type="file"
-              name="file"
-              className="form-input"
-              accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-            />
-          </div>
           <FormRowSelect
-            name="month"
+            name="bulan"
             labelText="bulan"
             required={true}
             list={[
@@ -51,10 +38,9 @@ const UploadFile = () => {
             ]}
           />
           <FormRowSelect
-            name="year"
+            name="tahun"
             labelText="Tahun"
             required={true}
-            defaultValue={YEAR.find((year) => year.value === 2024)?.value}
             list={[
               { value: "", labelOpt: "Pilih Tahun" },
               ...Object.values(YEAR),
@@ -65,7 +51,7 @@ const UploadFile = () => {
             className="btn form-btn"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "uploading..." : "upload"}
+            {isSubmitting ? "loading..." : "hapus"}
           </button>
         </div>
       </Form>
@@ -73,4 +59,4 @@ const UploadFile = () => {
   );
 };
 
-export default UploadFile;
+export default HapusData;

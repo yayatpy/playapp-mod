@@ -9,3 +9,4 @@ export { default as Profile } from "./Profile";
 export { default as Stats } from "./Stats";
 export { default as Password } from "./Password";
 export { default as UploadFile } from "../components/UploadFile";
+export { default as HapusData } from "../components/HapusData";

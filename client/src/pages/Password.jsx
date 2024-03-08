@@ -26,8 +26,8 @@ const Password = () => {
       <Form method="post" className="form">
         <h4 className="form-title">ganti password</h4>
         <div className="form-sort">
-          <FormRow type="text" name="newPassword" labelText="password baru" />
-          <FormRow type="text" name="confirmPass" labelText="ketik ulang" />
+          <FormRow type="text" name="password" labelText="password baru" />
+          <FormRow type="text" name="confPassword" labelText="ketik ulang" />
           <button
             type="submit"
             className="btn btn-block form-btn"
