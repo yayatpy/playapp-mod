@@ -11,3 +11,4 @@ export { default as UploadFile } from "./UploadFile";
 export { default as MenuAdmin } from "./MenuAdmin";
 export { default as HapusData } from "./HapusData";
 export { default as TambahPeg } from "./TambahPeg";
+export { default as ResetPass } from "./ResetPass";

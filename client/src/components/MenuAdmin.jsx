@@ -15,6 +15,9 @@ const MenuAdmin = () => {
         <Link className="btn form-btn" to="../admin/tambah-peg">
           tambah pegawai
         </Link>
+        <Link className="btn form-btn" to="../admin/reset-pass">
+          reset password pegawai
+        </Link>
       </div>
     </Wrapper>
   );

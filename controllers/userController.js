@@ -44,6 +44,21 @@ export const changePass = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: changePass });
 };
 
-export const adminMenu = async (req, res) => {
-  res.status(StatusCodes.OK).json({ msg: "admin" });
+export const changePassPeg = async (req, res) => {
+  const { password } = req.body;
+  const hashedPassword = await hashPassword(password);
+  const changePassPeg = await Pegawai.findOneAndUpdate(
+    { nip: req.body.nip },
+    {
+      password: hashedPassword,
+    }
+  );
+  res
+    .status(StatusCodes.OK)
+    .json({ msg: `Reset Password Pegawai an. ${changePassPeg.nama} berhasil` });
+};
+
+export const getAllPeg = async (req, res) => {
+  const allPeg = await Pegawai.find({});
+  res.status(StatusCodes.OK).json(allPeg);
 };

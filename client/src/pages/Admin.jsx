@@ -1,19 +1,9 @@
-import { toast } from "react-toastify";
-import { Outlet, redirect } from "react-router-dom";
-import customFetch from "../utils/customFetch";
-
-export const loader = async () => {
-  try {
-    const response = await customFetch.get("/users/admin");
-    return response.data;
-  } catch (error) {
-    toast.error("menu khusus untuk admin");
-    return redirect("/dashboard");
-  }
-};
+import { Outlet, useOutletContext } from "react-router-dom";
 
 const Admin = () => {
-  return <Outlet />;
+  const { peg } = useOutletContext();
+  const { role } = peg;
+  return role === "admin" ? <Outlet /> : <h4>menu ini hanya untuk admin</h4>;
 };
 
 export default Admin;

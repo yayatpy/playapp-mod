@@ -38,6 +38,19 @@ const Wrapper = styled.section`
   .link-font-size {
     font-size: var(--small-text);
   }
+  /* .select-style {
+    z-index: -10;
+    color: red;
+
+    margin: 1rem 0; */
+  /* line-height: 1.5;
+    font-size: var(--small-text);
+    color: var(--grey-900);
+    width: 100%;
+    border-radius: var(--border-radius); */
+  /* background: red;
+    border: 1px solid var(--grey-300);
+  } */
   @media (min-width: 992px) {
     .form-center {
       grid-template-columns: 1fr 1fr;

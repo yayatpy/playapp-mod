@@ -15,17 +15,20 @@ import {
   Password,
   HapusData,
 } from "./pages";
-import { MenuAdmin, TambahPeg, UploadFile } from "./components";
+import { MenuAdmin, ResetPass, TambahPeg, UploadFile } from "./components";
 
 import { action as loginAction } from "./pages/Login";
 import { loader as dashboardLoader } from "./pages/DashboardLayout";
 import { loader as tukinLoader } from "./pages/AllRincian";
 import { action as profileAction } from "./pages/Profile";
 import { action as passwordAction } from "./pages/Password";
-import { loader as adminLoader } from "./pages/Admin";
 import { action as actionUpload } from "./components/UploadFile";
 import { action as actionHapus } from "./components/HapusData";
 import { action as actionTambahPeg } from "./components/TambahPeg";
+import { action as resetPassword } from "./components/ResetPass";
+import { action as actionDelPeg } from "./pages/DeletePeg";
+import FilteredSelect from "./pages/testPage";
+import ErrorElement from "./components/ErrorElement";
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem("darkTheme") === "true";
@@ -53,12 +56,12 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
-        action: loginAction,
+        action: loginAction(queryClient),
       },
       {
         path: "dashboard",
-        element: <DashboardLayout />,
-        loader: dashboardLoader,
+        element: <DashboardLayout queryClient={queryClient} />,
+        loader: dashboardLoader(queryClient),
         children: [
           {
             index: true,
@@ -72,7 +75,7 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: <Profile />,
-            action: profileAction,
+            action: profileAction(queryClient),
           },
           {
             path: "password",
@@ -80,9 +83,12 @@ const router = createBrowserRouter([
             action: passwordAction,
           },
           {
+            path: "testPage",
+            element: <FilteredSelect />,
+          },
+          {
             path: "admin",
             element: <Admin />,
-            loader: adminLoader,
             children: [
               {
                 index: "true",
@@ -103,6 +109,15 @@ const router = createBrowserRouter([
                 element: <TambahPeg />,
                 action: actionTambahPeg,
               },
+              {
+                path: "reset-pass",
+                element: <ResetPass />,
+                action: resetPassword,
+              },
+              {
+                path: "delete-peg",
+                action: actionDelPeg,
+              },
             ],
           },
         ],
@@ -114,7 +129,7 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

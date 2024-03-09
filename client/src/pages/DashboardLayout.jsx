@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import {
   Outlet,
   redirect,
@@ -12,11 +13,19 @@ import { checkDefaultTheme } from "../App";
 import customFetch from "../utils/customFetch";
 import { toast } from "react-toastify";
 import Loading from "../components/Loading";
+import { useQuery } from "@tanstack/react-query";
 
-export const loader = async () => {
-  try {
-    const { data } = await customFetch.get("/users/current-peg");
+const userQuery = {
+  queryKey: ["user"],
+  queryFn: async () => {
+    const { data } = await customFetch("/users/current-peg");
     return data;
+  },
+};
+
+export const loader = (queryClient) => async () => {
+  try {
+    return await queryClient.ensureQueryData(userQuery);
   } catch (error) {
     return redirect("/");
   }
@@ -24,11 +33,12 @@ export const loader = async () => {
 
 const DashboardContext = createContext();
 
-const Dashboard = () => {
+const Dashboard = ({ queryClient }) => {
+  const { peg } = useQuery(userQuery).data;
+
   const navigation = useNavigation();
   const isPageLoading = navigation.state === "loading";
 
-  const { peg } = useLoaderData();
   const navigate = useNavigate();
 
   const [showSidebar, setShowSidebar] = useState(false);
@@ -48,6 +58,7 @@ const Dashboard = () => {
   const logoutUser = async () => {
     navigate("/");
     await customFetch.get("/auth/logout");
+    queryClient.invalidateQueries();
     toast.success("Logout berhasil");
   };
 

@@ -4,6 +4,7 @@ const FormRowSelect = ({
   list,
   defaultValue = "",
   required,
+  onChange,
 }) => {
   return (
     <div className="form-row">
@@ -16,6 +17,7 @@ const FormRowSelect = ({
         className="form-select"
         defaultValue={defaultValue}
         required={false || required}
+        onChange={onChange}
       >
         {list.map((itemValue) => {
           const { value, labelOpt } = itemValue;

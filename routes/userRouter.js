@@ -4,18 +4,19 @@ import {
   validateChangePass,
   validateUpdatePegInput,
 } from "../middleware/validationMiddleware.js";
-import { authorizePermission } from "../middleware/authMiddleware.js";
 import {
   changePass,
   getAppStats,
   getCurrentPeg,
   updatePeg,
+  getAllPeg,
+  changePassPeg,
 } from "../controllers/userController.js";
-import { adminMenu } from "../controllers/userController.js";
 import upload from "../middleware/multerMiddleware.js";
 const router = Router();
 
 router.get("/current-peg", getCurrentPeg);
+router.get("/all-peg", getAllPeg);
 router.get("/app-stats", getAppStats);
 router.patch(
   "/update-peg",
@@ -24,7 +25,6 @@ router.patch(
   updatePeg
 );
 router.patch("/change-pass", validateChangePass, changePass);
-
-router.get("/admin", authorizePermission("admin"), adminMenu);
+router.patch("/change-pass-peg", validateChangePass, changePassPeg);
 
 export default router;
