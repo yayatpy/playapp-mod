@@ -10,3 +10,4 @@ export { default as Stats } from "./Stats";
 export { default as Password } from "./Password";
 export { default as UploadFile } from "../components/UploadFile";
 export { default as HapusData } from "../components/HapusData";
+export { default as DeletePeg } from "./DeletePeg";

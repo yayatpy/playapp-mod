@@ -59,6 +59,7 @@ export const validateUpdatePegInput = withValidationErrors([
 ]);
 
 export const validateChangePass = withValidationErrors([
+  body("nip").notEmpty().withMessage("Anda belum pilih nama pegawai"),
   body("password")
     .isLength({ min: 6 })
     .withMessage("Password minimal 6 karakter"),

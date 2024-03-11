@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import { NotFoundError } from "../errors/customErrors.js";
-import Tukin from "../models/tukinTestModel.js";
+import Tukin from "../models/tukinModel.js";
 
 //GET ALL TUKINS
 export const getAllTukins = async (req, res) => {

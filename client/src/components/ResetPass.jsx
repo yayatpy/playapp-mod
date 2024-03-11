@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FormRow } from "../components";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
-import { Form, Link, redirect } from "react-router-dom";
+import { Form, redirect } from "react-router-dom";
 import SelectWithSearch from "./SelectWithSearch";
 import customFetch from "../utils/customFetch";
 import { toast } from "react-toastify";
@@ -42,10 +42,10 @@ const ResetPass = () => {
     <Wrapper>
       <Form method="post" className="form">
         <h4 className="form-title">Reset Password Pegawai</h4>
-        <div className="select-style">
-          <SelectWithSearch options={users} onChange={handleUserSelect} />
-        </div>
         <div className="form-center">
+          <div className="select-style">
+            <SelectWithSearch options={users} onChange={handleUserSelect} />
+          </div>
           <FormRow
             type="text"
             name="nip"

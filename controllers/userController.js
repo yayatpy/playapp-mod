@@ -62,3 +62,10 @@ export const getAllPeg = async (req, res) => {
   const allPeg = await Pegawai.find({});
   res.status(StatusCodes.OK).json(allPeg);
 };
+
+export const deletePeg = async (req, res) => {
+  await Pegawai.deleteOne(req.params);
+  res.status(StatusCodes.OK).json({
+    msg: `Pegawai berhasil dihapus dari database`,
+  });
+};

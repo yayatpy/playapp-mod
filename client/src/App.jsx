@@ -14,6 +14,7 @@ import {
   Admin,
   Password,
   HapusData,
+  DeletePeg,
 } from "./pages";
 import { MenuAdmin, ResetPass, TambahPeg, UploadFile } from "./components";
 
@@ -27,8 +28,11 @@ import { action as actionHapus } from "./components/HapusData";
 import { action as actionTambahPeg } from "./components/TambahPeg";
 import { action as resetPassword } from "./components/ResetPass";
 import { action as actionDelPeg } from "./pages/DeletePeg";
-import FilteredSelect from "./pages/testPage";
 import ErrorElement from "./components/ErrorElement";
+import { useEffect } from "react";
+import { generateToken, messaging } from "./utils/notification.js";
+import { onMessage } from "firebase/messaging";
+import { toast } from "react-toastify";
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem("darkTheme") === "true";
@@ -83,10 +87,6 @@ const router = createBrowserRouter([
             action: passwordAction,
           },
           {
-            path: "testPage",
-            element: <FilteredSelect />,
-          },
-          {
             path: "admin",
             element: <Admin />,
             children: [
@@ -116,6 +116,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "delete-peg",
+                element: <DeletePeg />,
                 action: actionDelPeg,
               },
             ],
@@ -127,6 +128,18 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+  useEffect(() => {
+    generateToken();
+    onMessage(messaging, (payload) => {
+      console.log(payload);
+      toast.info(payload.notification.body, {
+        autoClose: false,
+        theme: "colored",
+        position: "top-center",
+      });
+    });
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />

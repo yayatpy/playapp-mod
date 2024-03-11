@@ -7,7 +7,6 @@ const customStyles = {
     borderRadius: "0.25rem", // Customize border radius
     background: "#f8fafc", // Customize background color
     border: "1px solid #cbd5e1", // Customize border
-    marginBottom: "1rem",
   }),
   option: (provided) => ({
     ...provided,

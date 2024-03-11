@@ -7,6 +7,7 @@ const FormRow = ({
   disabled,
   readOnly,
   value,
+  required,
 }) => {
   return (
     <div className="form-row">
@@ -19,7 +20,7 @@ const FormRow = ({
         id={name}
         name={name}
         defaultValue={defaultValue}
-        required
+        required={required}
         readOnly={readOnly || false}
         value={value}
         onChange={onChange}

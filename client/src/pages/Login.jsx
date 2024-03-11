@@ -28,13 +28,8 @@ const Login = () => {
       <Form method="post" className="form">
         <Logo />
         <h4>Login</h4>
-        <FormRow
-          type="text"
-          name="nip"
-          labelText="NIP"
-          defaultValue={"198309282010121002"}
-        />
-        <FormRow type="password" name="password" defaultValue={"king1212"} />
+        <FormRow type="text" name="nip" labelText="NIP" />
+        <FormRow type="password" name="password" />
         <button type="submit" className="btn btn-block" disabled={isSubmitting}>
           {isSubmitting ? "submitting" : "submit"}
         </button>

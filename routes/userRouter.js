@@ -11,6 +11,7 @@ import {
   updatePeg,
   getAllPeg,
   changePassPeg,
+  deletePeg,
 } from "../controllers/userController.js";
 import upload from "../middleware/multerMiddleware.js";
 const router = Router();
@@ -26,5 +27,6 @@ router.patch(
 );
 router.patch("/change-pass", validateChangePass, changePass);
 router.patch("/change-pass-peg", validateChangePass, changePassPeg);
+router.delete("/delete-peg/:nip", deletePeg);
 
 export default router;

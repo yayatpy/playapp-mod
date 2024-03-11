@@ -9,7 +9,6 @@ export const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   const { bulan, tahun } = data;
-  console.log(bulan);
   try {
     const response = await customFetch.delete(`/tukins/${bulan}/${tahun}`);
     toast.success(response.data.msg);
